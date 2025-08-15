@@ -1,0 +1,30 @@
+ public function laporanStatus()
+    {
+        $siswaModel = new SiswaModel();
+        $data['siswa'] = $siswaModel->findAll();
+
+        return view('layout/template', [
+            'content' => 'siswa/laporan',
+            'data' => $data
+        ]);
+    }
+
+
+
+
+    public function laporanStatus()
+    {
+        // Cek apakah ada filter status
+        $status = $this->request->getGet('status_kurang_mampu');
+
+        if ($status !== null) {
+            // Filter berdasarkan status kurang mampu (1 atau 0)
+            $data['siswa'] = $this->siswaModel->where('status_kurang_mampu', $status)->findAll();
+        } else {
+            // Ambil semua data jika tidak ada filter
+            $data['siswa'] = $this->siswaModel->findAll();
+        }
+
+        // Kirim data ke view laporan
+        return view('siswa/laporan', $data);
+    }

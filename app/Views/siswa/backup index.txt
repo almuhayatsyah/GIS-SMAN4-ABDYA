@@ -1,0 +1,83 @@
+<?= $this->extend('layout/template') ?>
+<?= $this->section('content') ?>
+<div class="container-fluid">
+
+</div>
+<div class="container-fluid">
+    <h1
+        class="h3 mb-4 text-gray-800">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Daftar Siswa Sman 4 Aceh Barat Daya
+    </h1>
+    <div>
+        <a href="<?= base_url('siswa/create') ?>" class="btn btn-primary mb-3">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Tambah Siswa</a>
+        <a href="<?= base_url('siswa/export-pdf') ?>" class="btn btn-danger mb-3">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            Download PDF</a>
+
+
+    </div>
+
+    <table class="table table-bordered">
+</div>
+
+<div>
+    <form action="<?= site_url('siswa') ?>" method="get">
+        <div class="form-group">
+            <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan NISN atau Nama,Kelas" value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+    </form>
+</div>
+
+<thead>
+
+    <tr>
+        <!-- <th>id</th> -->
+        <th>NISN</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>Tanggal Lahir</th>
+        <th>Jenis Kelamin</th>
+        <th>Alamat</th>
+        <th>foto</th>
+        <th>Status KM</th>
+        <th>Aksi</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach ($siswa as $s): ?>
+        <tr>
+            <td><?= $s['id'] ?></td>
+            <td><?= $s['nisn'] ?></td>
+            <td><?= $s['nama_siswa'] ?></td>
+            <td><?= $s['kelas'] ?></td>
+            <td><?= date('d/m/Y', strtotime($s['tanggal_lahir'])); ?></td>
+
+            <td><?= $s['jenis_kelamin'] ?></td>
+            <td><?= $s['alamat'] ?></td>
+            <td><?= $s['foto_siswa'] ?></td>
+
+
+
+            <td>
+                <?php if ($s['status_kurang_mampu'] == 1): ?>
+                    <span class="badge badge-danger">Kurang Mampu</span>
+                <?php else: ?>
+                    <span class="badge badge-success">Tidak Kurang Mampu</span>
+                <?php endif; ?>
+            </td>
+
+
+            <td>
+                <a href="<?= base_url('siswa/edit/' . $s['id']) ?>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="<?= base_url('siswa/delete/' . $s['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+</table>
+</div>
+<?= $this->endSection() ?>
