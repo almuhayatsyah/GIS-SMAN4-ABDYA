@@ -30,16 +30,12 @@
                                     <th class="text-center">Agama</th>
                                     <th class="text-center">Tanggal Lahir</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Foto Rumah</th>
-                                    <th class="text-center">Nama Ayah</th>
-                                    <th class="text-center">Gaji Ayah</th>
-                                    <th class="text-center">Nama Ibu</th>
-                                    <th class="text-center">Gaji Ibu</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (!empty($siswa) && is_array($siswa)): ?>
-                                    <?php $no = 1; foreach ($siswa as $row): ?>
+                                    <?php $no = 1;
+                                    foreach ($siswa as $row): ?>
                                         <tr>
                                             <td class="text-center"><?= $no++; ?></td>
                                             <td><?= esc($row['nisn']); ?></td>
@@ -50,8 +46,8 @@
                                             <td class="text-center"><?= esc($row['tanggal_lahir'] ?? '-'); ?></td>
                                             <td class="text-center">
                                                 <?php if (isset($row['status_kurang_mampu'])): ?>
-                                                    <span class="badge <?= $row['status_kurang_mampu'] == 1 ? 'badge-danger' : 'badge-success'; ?>">
-                                                        <?= $row['status_kurang_mampu'] == 1 ? 'Kurang Mampu' : 'Mampu'; ?>
+                                                    <span class="badge <?= $row['status_kurang_mampu'] == 1 ? 'badge-warning' : 'badge-success'; ?>">
+                                                        <?= $row['status_kurang_mampu'] == 1 ? 'Biasa Saja' : 'Mampu'; ?>
                                                     </span>
                                                 <?php else: ?>
                                                     -
@@ -64,14 +60,12 @@
                                                     <span class="text-muted">-</span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td class="text-center"><?= esc($row['nama_ayah'] ?? '-') ?></td>
-                                            <td class="text-center"><?= !empty($row['gaji_ayah']) ? 'Rp ' . number_format($row['gaji_ayah'],0,',','.') : '-' ?></td>
-                                            <td class="text-center"><?= esc($row['nama_ibu'] ?? '-') ?></td>
-                                            <td class="text-center"><?= !empty($row['gaji_ibu']) ? 'Rp ' . number_format($row['gaji_ibu'],0,',','.') : '-' ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <tr><td colspan="12" class="text-center">Tidak ada data siswa.</td></tr>
+                                    <tr>
+                                        <td colspan="12" class="text-center">Tidak ada data siswa.</td>
+                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>

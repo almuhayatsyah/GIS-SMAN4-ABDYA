@@ -134,9 +134,8 @@ class SiswaController extends BaseController
             'umur'          => $this->request->getPost('umur'),
             'nomor_hp'      => $this->request->getPost('nomor_hp'),
             'lokasi_id'     => $newLokasiId,
-            'foto_rumah'    => $fotoName, // Menyimpan ke field 'foto_rumah'
-            'status_kurang_mampu' => 0, // Default: Tidak Kurang Mampu, akan diupdate otomatis saat data ortu diinput
-            // 'ortu_id'       => $this->request->getPost('ortu_id'),
+            'foto_rumah'    => $fotoName, 
+            'status_kurang_mampu' => 0, // Default: Tidak Kurang Mampu, akan diupdate otomatis 
         ];
 
         if (!$this->siswaModel->insert($siswaData)) {

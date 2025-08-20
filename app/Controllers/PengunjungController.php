@@ -257,11 +257,7 @@ class PengunjungController extends Controller
 
   public function listSiswa()
   {
-    // Pengecekan role, pastikan pengunjung sudah login
-    if (session()->get('role') !== 'pengunjung') {
-      return redirect()->to('auth/login');
-    }
-
+    // Hapus pengecekan role agar bisa diakses oleh semua pengunjung tanpa login
     $siswaModel = new \App\Models\SiswaModel();
     $siswa = $siswaModel
       ->select([
@@ -280,7 +276,8 @@ class PengunjungController extends Controller
       ])
       ->join('kelas', 'kelas.id = siswa.kelas_id', 'left')
       ->join('lokasi', 'lokasi.id = siswa.lokasi_id', 'left')
-      ->join('ortu', 'ortu.id_siswa = siswa.id', 'left')
+      ->join('ortu', 'ortu.id_siswa = siswa.id', 'inner') // Changed to 'inner' to only show students with parent data
+      ->where('ortu.id_siswa IS NOT NULL') // Additional filter to ensure parent data exists
       ->orderBy('siswa.nama_siswa', 'ASC')
       ->findAll();
 

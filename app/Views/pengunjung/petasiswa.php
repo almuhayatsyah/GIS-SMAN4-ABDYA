@@ -38,7 +38,10 @@
     let lastInfoWindow = null;
 
     window.initMap = function() {
-        const defaultCenter = { lat: 3.801945752962619, lng: 96.77563314105208 };
+        const defaultCenter = {
+            lat: 3.801945752962619,
+            lng: 96.77563314105208
+        };
         let initialCenter = defaultCenter;
         let zoomLevel = 13;
         let bounds;
@@ -124,7 +127,10 @@
                 infoWindow.open(map, marker);
                 lastInfoWindow = infoWindow;
             });
-            allMarkers.push({ marker, data: siswa });
+            allMarkers.push({
+                marker,
+                data: siswa
+            });
         });
     }
 

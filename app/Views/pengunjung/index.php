@@ -5,19 +5,24 @@
     /* Style untuk peta */
     #map {
         width: 100%;
-        height: 500px; /* Atau sesuaikan tinggi yang Anda inginkan */
+        height: 500px;
+        /* Atau sesuaikan tinggi yang Anda inginkan */
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         border: 1px solid #ddd;
     }
+
     /* Opsional: Style untuk memastikan judul peta terlihat bagus */
     .dashboard-header-stat {
         padding: 1.5rem;
-        background-color: #f8f9fc; /* Sedikit berbeda dari bg-white */
+        background-color: #f8f9fc;
+        /* Sedikit berbeda dari bg-white */
         border-bottom: 1px solid #e3e6f0;
     }
+
     .map-container {
-        margin-top: 2rem; /* Jarak dari konten di atasnya jika ada */
+        margin-top: 2rem;
+        /* Jarak dari konten di atasnya jika ada */
     }
 </style>
 
@@ -40,25 +45,18 @@
                                 <th>NISN</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>Nama Ayah</th>
-                                <th>Gaji Ayah</th>
-                                <th>Nama Ibu</th>
-                                <th>Gaji Ibu</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (!empty($siswaTerbaru)): ?>
-                                <?php $no = 1; foreach ($siswaTerbaru as $s): ?>
+                                <?php $no = 1;
+                                foreach ($siswaTerbaru as $s): ?>
                                     <tr>
                                         <td class="text-center"><?= $no++ ?></td>
                                         <td><?= esc($s['nisn']) ?></td>
                                         <td><?= esc($s['nama_siswa']) ?></td>
                                         <td><?= esc($s['nama_kelas'] ?? '-') ?></td>
-                                        <td><?= esc($s['nama_ayah'] ?? '-') ?></td>
-                                        <td><?= !empty($s['gaji_ayah']) ? 'Rp ' . number_format($s['gaji_ayah'],0,',','.') : '-' ?></td>
-                                        <td><?= esc($s['nama_ibu'] ?? '-') ?></td>
-                                        <td><?= !empty($s['gaji_ibu']) ? 'Rp ' . number_format($s['gaji_ibu'],0,',','.') : '-' ?></td>
                                         <td>
                                             <span class="badge <?= $s['status_kurang_mampu'] == 1 ? 'badge-danger' : 'badge-success' ?>">
                                                 <?= $s['status_kurang_mampu'] == 1 ? 'Kurang Mampu' : 'Mampu' ?>
@@ -67,7 +65,9 @@
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <tr><td colspan="9" class="text-center">Belum ada data siswa.</td></tr>
+                                <tr>
+                                    <td colspan="9" class="text-center">Belum ada data siswa.</td>
+                                </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
@@ -89,7 +89,10 @@
     let lastInfoWindow = null;
 
     window.initMap = function() {
-        const defaultCenter = { lat: 3.801945752962619, lng: 96.77563314105208 };
+        const defaultCenter = {
+            lat: 3.801945752962619,
+            lng: 96.77563314105208
+        };
         let initialCenter = defaultCenter;
         let zoomLevel = 13;
         let bounds;
@@ -175,7 +178,10 @@
                 infoWindow.open(map, marker);
                 lastInfoWindow = infoWindow;
             });
-            allMarkers.push({ marker, data: siswa });
+            allMarkers.push({
+                marker,
+                data: siswa
+            });
         });
     }
 
